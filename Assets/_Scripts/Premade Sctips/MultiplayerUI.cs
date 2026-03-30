@@ -13,6 +13,8 @@ public class MultiplayerUI : MonoBehaviour
     [SerializeField]
     private Button m_hostButton, m_clientButton, m_clientDisconnect;
 
+    public int OnStartServer { get; internal set; }
+
     public event Action OnStartHost, OnStartClient, OnDiconnectClient;
     private void Awake()
     {

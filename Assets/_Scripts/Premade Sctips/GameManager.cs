@@ -1,26 +1,26 @@
-using UnityEngine;
+using System;
 using Unity.Netcode;
+using UnityEngine;
 
 public class GameManager : NetworkBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private MultiplayerUI m_multiplayerUI;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void Start()
     {
-        if(m_multiplayerUI != null)
+        if (m_multiplayerUI != null)
         {
-            m_multiplayerUI.OnStartHost += OnStartHost;
-            m_multiplayerUI.OnStartClient += OnStartClient;
-            m_multiplayerUI.OnStartServer += OnStartServer;
+            m_multiplayerUI.OnStartHost += StartHost;
+            m_multiplayerUI.OnStartClient += StartClient;
+            m_multiplayerUI.OnDiconnectClient += DisconnectClient;
         }
     }
 
-    // Update is called once per frame
     private void DisconnectClient()
     {
-        m_multiplayerUI.EnableButtons();  
-        NetworkManager.Shutdown();        
+        m_multiplayerUI.EnableButtons();
+        NetworkManager.Shutdown();
     }
 
     private void StartClient()
